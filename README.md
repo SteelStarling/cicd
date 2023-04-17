@@ -4,7 +4,7 @@
 [![run-tests](../../actions/workflows/python-test.yml/badge.svg)](../../actions/workflows/python-test.yml)
 [![docker-publish](../../actions/workflows/docker-publish.yml/badge.svg)](../../actions/workflows/docker-publish.yml)
 
-(Change to Commit)
+(TEST: Change to Commit)
 
 CI is a software development practice in which incremental code changes are made frequently and reliably. 
 Automated build-and-test steps triggered by CI ensure that code changes being merged into the repository are reliable. 
