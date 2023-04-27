@@ -4,7 +4,7 @@ Author: Taylor Hancock
 """
 
 from unittest import TestCase
-from src.main import check_distance, distance_string
+from main import check_distance, distance_string
 
 
 class Test(TestCase):
