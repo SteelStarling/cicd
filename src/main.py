@@ -12,10 +12,10 @@ def check_distance(num: int) -> int:
     return abs(num - The_Correct_Answer)
 
 
-def distance_string(num: str, error_msg: str) -> str:
+def distance_string(num: str, error_msg: str = "Not a Number") -> str:
     """ Return a string indicating the distance from any given num to The Answer (or if it's related to The Answer), or
         the provided error message if num is not a number. """
-    if num.isnumeric():
+    if num.lstrip("-+").isnumeric():  # Ignore leading signs
         distance = check_distance(int(num))
         return f"{num} is {'The Answer!' if distance == 0 else f'{distance} away from The Correct Answer'}"
     else:

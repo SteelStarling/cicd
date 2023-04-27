@@ -1,21 +1,24 @@
 """
 Test the main module.
-Author: Wolf Paulus (wolf@paulus.com)
+Author: Taylor Hancock
 """
+
 from unittest import TestCase
-from main import is_odd, is_odd_str
+from src.main import check_distance, distance_string
 
 
 class Test(TestCase):
-    def test_is_odd(self):
-        assert not is_odd(0)
-        assert is_odd(1)
-        assert not is_odd(2)
+    def test_check_distance(self):
+        assert check_distance(42) == 0      # handles correct number
+        assert check_distance(0) == 42      # handles smaller numbers
+        assert check_distance(100) == 58    # handles larger numbers
+        assert check_distance(-42) == 84    # handles negatives
 
-    def test_is_odd_str(self):
-        assert is_odd_str("0") == "0 is even."
-        assert is_odd_str("1") == "1 is odd."
-        assert is_odd_str("2") == "2 is even."
-        assert is_odd_str("-1") == "Please enter a number."
-        assert is_odd_str("A") == "Please enter a number."
-        assert is_odd_str("") == "Please enter a number."
+    def test_distance_string(self):
+        assert distance_string("42") == "42 is The Answer!"                         # handles correct number
+        assert distance_string("0") == "0 is 42 away from The Correct Answer"       # handles smaller numbers
+        assert distance_string("100") == "100 is 58 away from The Correct Answer"   # handles larger numbers
+        assert distance_string("-42") == "-42 is 84 away from The Correct Answer"   # handles negatives
+        assert distance_string("A") == "Not a Number"                               # handles non-numbers
+        assert distance_string("") == "Not a Number"                                # handles empty string
+        assert distance_string("", "Error") == "Error"                              # handles custom error message
