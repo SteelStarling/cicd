@@ -4,7 +4,7 @@ Author: Wolf Paulus (https://wolfpaulus.com)
 """
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from time import asctime
-from main import is_odd
+from main import distance_string
 
 hostName = "0.0.0.0"
 serverPort = 8080
@@ -17,7 +17,7 @@ class MyServer(BaseHTTPRequestHandler):
         elif self.path == "/" or self.path.startswith("/?number="):
             status = 200
             number = self.path.split("=")[1] if self.path.startswith("/?number=") else ""
-            result = f"{number} is {'odd' if is_odd(int(number)) else 'even'}." if number.isnumeric() else ""
+            result = distance_string(number, "") # Leave error message blank
             with open('./src/response.html', 'r') as f:
                 # read the html template and fill in the parameters: path, time and result
                 content = f.read().format(path=self.path, time=asctime(), result=result)

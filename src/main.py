@@ -1,17 +1,26 @@
 """
-odd/even number checker
-Author: Wolf Paulus (https://wolfpaulus.com)
+System to check how far any given number is from The Answer (42).
+Author: Taylor Hancock
 """
 
-
-def is_odd(num: int) -> bool:
-    """Return True if num is odd, False otherwise."""
-    return num % 2 == 1
+""" The Answer to Life, the Universe, and Everything """
+The_Correct_Answer = 42
 
 
-def is_odd_str(num: str) -> str:
-    """Return a string indicating whether num is odd or even."""
+def check_distance(num: int) -> int:
+    """ Return the distance from num to The Answer """
+    return abs(num - The_Correct_Answer)
+
+
+def distance_string(num: str, error_msg: str) -> str:
+    """ Return a string indicating the distance from any given num to The Answer (or if it's related to The Answer), or
+        the provided error message if num is not a number. """
     if num.isnumeric():
-        return f"{num} is {'odd' if is_odd(int(num)) else 'even'}."
+        distance = check_distance(int(num))
+        return f"{num} is {'The Answer!' if distance == 0 else f'{distance} away from The Correct Answer'}"
     else:
-        return "Please enter a number."
+        return error_msg
+
+
+if __name__ == "__main__":
+    print(distance_string("42", "Not a number"))
