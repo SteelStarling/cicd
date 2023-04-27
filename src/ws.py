@@ -21,6 +21,25 @@ class MyServer(BaseHTTPRequestHandler):
             with open('./src/response.html', 'r') as f:
                 # read the html template and fill in the parameters: path, time and result
                 content = f.read().format(path=self.path, time=asctime(), result=result)
+        elif self.path == "/teapot":
+            status = 418
+            content = "<html>" \
+                      "<head>" \
+                      "<link rel='preconnect' href='https://fonts.googleapis.com'>" \
+                      "<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>" \
+                      "<link href='https://fonts.googleapis.com/css2?family=Castoro+Titling&display=swap'" \
+                      "rel='stylesheet'>" \
+                      "<style>" \
+                      "h1 {text-align: center; font-family: 'Castoro Titling', cursive;}" \
+                      "</style>" \
+                      "</head>" \
+                      "<body>" \
+                      "<h1>ERROR 418:<br>" \
+                      "I'm a Little Teapot,<br>" \
+                      "Short and Stout,<br>" \
+                      "Tip Me Over<br>and Pour Me Out</h1>" \
+                      "</body>" \
+                      "</html>"
         else:
             status, content = 404, "Not Found"
         self.send_response(status)
