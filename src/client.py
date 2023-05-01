@@ -1,16 +1,16 @@
 """
 Simple WebService Client, using urllib.request, making 10 requests to the WebService, after a health check.
 Author: Wolf Paulus (https://wolfpaulus.com)
-
 """
 
 import urllib.request
 import json
 
-server_url = "http://localhost:8080"  # change this to the URL of your WebService
-server_url ="https://erau08.techcasitaproductions.com/"
+# server_url = "http://localhost:8080"  # change this to the URL of your WebService
+server_url = "https://erau05.techcasitaproductions.com/"
 service_url = f"{server_url}/?number="
 health_url = f"{server_url}/health"
+teapot_url = f"{server_url}/teapot"
 
 
 def get_health() -> bool:
@@ -23,13 +23,12 @@ def get_health() -> bool:
 def remote_json_check(number: int) -> str:
     url = f"{service_url}{number}"
     print(f"Checking {url}")
-    req = urllib.request.Request(url, headers= {
+    req = urllib.request.Request(url, headers={
         'User-Agent': 'Mozilla/5.0',
         'Accept': 'application/json'})
     with urllib.request.urlopen(req) as response:
         if response.status != 200:
-            raise Exception(f"Error: {response.status}")
-        #print(response.read().decode('utf-8'))
+            raise Exception(f"Error {response.status}: {response.error}")
         my_dict = json.loads(response.read().decode('utf-8'))
         return str(my_dict)
 
@@ -38,3 +37,7 @@ if __name__ == "__main__":
     if get_health():
         for i in range(7,10):
             print(f"{i} is odd: {remote_json_check(i)}")
+
+        print(f"Checking {teapot_url}")
+        req = urllib.request.Request(teapot_url, headers={'User-Agent': 'Mozilla/5.0',
+                                                          'Accept': 'application/json'})
